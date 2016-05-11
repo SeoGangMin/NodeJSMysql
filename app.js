@@ -3,7 +3,8 @@ var express       = require('express')
     ,favicon      = require('serve-favicon')
     ,logger       = require('morgan')
     ,cookieParser = require('cookie-parser')
-    ,bodyParser   = require('body-parser');
+    ,bodyParser   = require('body-parser')
+    ,fs            = require('fs');
 
 var app       = express()
     ,logFile  = fs.createWriteStream(__dirname + '/logs/server.log', {flags:'a'});
@@ -24,11 +25,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-var routes = require('./routes/index');
+var index = require('./routes/index');
 var users = require('./routes/users');
 
 
-app.use('/', routes);
+app.use('/', index);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
@@ -45,6 +46,7 @@ app.use(function(req, res, next) {
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
+    console.log(err);
     res.render('error', {
       message: err.message,
       error: err
@@ -56,11 +58,13 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
+  console.log(err);
   res.render('error', {
     message: err.message,
     error: {}
   });
 });
 
+app.listen(1337);
 
 module.exports = app;
