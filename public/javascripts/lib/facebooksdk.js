@@ -2,12 +2,12 @@
 function statusChangeCallback(response) {
   //로그온 상태 - 사용자의 정보를 불러옴
   if (response.status === 'connected') {
-    var userID = response.authResponse.userID;    
-    getUserProfile({user_id:userID});
+    console.log(response);
+    //getUserProfile();
   }
   else {
     //로그 아웃상태
-    $('#btnStart').text('Signup').attr('onclick', 'onclick_facebookLogin();').show();
+    //$('#btnStart').text('Signup').attr('onclick', 'onclick_facebookLogin();').show();
   }
 }
 
@@ -36,20 +36,13 @@ window.fbAsyncInit = function() {
 
 // Here we run a very simple test of the Graph API after login is
 // successful.  See statusChangeCallback() for when this call is made.
-function setLogon() {
-  FB.api('/me/picture?width=150&height=150', function(response) {
-    console.log(response);
-    var picture_uri = response.data.url;
-    $('#btnFbLogin').css({'background-image':'url("'+picture_uri+'")', 'content':''});
-  });
-}
 
 function onclick_facebookLogin(){
   FB.login(function(response){
     console.log(response);
      if (response.status === 'connected') {
        var userId = response.authResponse.userID;
-       getUserProfile({user_id : userId});
+       getUserProfile();
      }
      else {
        alert('페이스북 로그인에 실패하였습니다.');
@@ -64,10 +57,16 @@ function onclick_facebookLogout(){
   });
 }
 
-function getUserProfile(user){
-  FB.api('/me/picture?width=150&height=150', function(response) {
-    user['profile_img'] = response.data.url;
+function getUserProfile(){
+  FB.api('/me?fields=id,name', function(response) {
+    console.log(response);
+    var user = {
+      fb_id : response.id
+      ,name : response.name
+      ,picture : 'http://graph.facebook.com/'+response.id+'/picture?type=large&width=100&height=100'
+    };
     console.log(user);
-    $('#btnStart').text('Let\'s Start!').attr('onclick', '').attr('href', '/').show();
+    $('a.smGlobalBtn').removeClass('facebookBtn').css({'background-image':'url("'+user['picture']+'")'});
   });
+
 }

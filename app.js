@@ -5,6 +5,7 @@ var express       = require('express')
     ,cookieParser = require('cookie-parser')
     ,bodyParser   = require('body-parser')
     ,fs           = require('fs')
+    ,redis        = require('redis')
     ,session      = require('express-session')
     ,redisStore   = require('connect-redis')(session);
 
