@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var Mysql  = COMMON.MysqlWrapper
+var Mysql  = COMMONS.MysqlWrapper
     ,Query = QUERIES.Users;
 
 /* GET users listing. */

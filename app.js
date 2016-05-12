@@ -4,6 +4,8 @@ var express       = require('express')
     ,logger       = require('morgan')
     ,cookieParser = require('cookie-parser')
     ,bodyParser   = require('body-parser')
+    ,fs           = require('fs')
+    ,redis        = require('redis')
     ,session      = require('express-session')
     ,redisStore   = require('connect-redis')(session);
 
