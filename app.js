@@ -9,7 +9,7 @@ var express       = require('express')
     ,session      = require('express-session')
     ,redisStore   = require('connect-redis')(session);
 
-global.CONFIG  = require('./config');
+global.CONFIGS  = require('./config');
 global.COMMONS = require('./commons');
 global.QUERIES = require('./queries');
 
@@ -29,8 +29,8 @@ app.use(session({
     secret: 'ssshhhhh',
     // create new redis store.
     store: new redisStore({
-      host    : CONFIG.REDIS.host
-      ,port   : CONFIG.REDIS.port
+      host    : CONFIGS.REDIS.host
+      ,port   : CONFIGS.REDIS.port
       ,client : redisClient
       ,ttl    :  260
     }),

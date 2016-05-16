@@ -3,7 +3,7 @@ function statusChangeCallback(response) {
   //로그온 상태 - 사용자의 정보를 불러옴
   if (response.status === 'connected') {
     console.log(response);
-    //getUserProfile();
+    getUserProfile();
   }
   else {
     //로그 아웃상태
@@ -14,8 +14,7 @@ function statusChangeCallback(response) {
 window.fbAsyncInit = function() {
     FB.init({
       appId      : '1764303753841663',
-      cookie     : true,  // enable cookies to allow the server to access
-                          // the session
+      cookie     : true,  // enable cookies to allow the server to access                          // the session
       xfbml      : true,  // parse social plugins on this page
       version    : 'v2.6' // use version 2.2
     });
@@ -46,7 +45,6 @@ function onclick_facebookLogin(){
      }
      else {
        alert('페이스북 로그인에 실패하였습니다.');
-       $('#btnStart').text('Signup').attr('onclick', 'onclick_facebookLogin();').show();
      }
    },{scope: 'public_profile,email',return_scopes: true});
 }
@@ -58,15 +56,13 @@ function onclick_facebookLogout(){
 }
 
 function getUserProfile(){
-  FB.api('/me?fields=id,name', function(response) {
-    console.log(response);
+  FB.api('/me?fields=id,name', function(response) {    
     var user = {
       fb_id : response.id
       ,name : response.name
       ,picture : 'http://graph.facebook.com/'+response.id+'/picture?type=large&width=100&height=100'
     };
     console.log(user);
-    $('a.smGlobalBtn').removeClass('facebookBtn').css({'background-image':'url("'+user['picture']+'")'});
   });
 
 }

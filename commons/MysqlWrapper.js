@@ -1,7 +1,7 @@
 var Mysql     = require('mysql')
   ,Q          = require('q')
   ,util       = require('util')
-  ,DB_OPTIONS = CONFIG['DB_OPTIONS'];
+  ,DB_OPTIONS = CONFIGS['DB_OPTIONS'];
 
 console.log('\n/*************** database options ******************/');
 console.log(DB_OPTIONS);

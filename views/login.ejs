@@ -10,21 +10,22 @@
         <link href="/theme/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="/stylesheets/style-login.css" rel="stylesheet">
         <link href="/theme/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-        <script src="/javascripts/lib/facebooksdk.js"></script>
+        <script src="/javascripts/login.js"></script>
         <script src="/theme/jquery/dist/jquery.min.js"></script>
     </head>
 
     <body>
       <div class="container">
         <div class="text-vertical-center">
-            <h1>Let's StartUp</h1>
+            <h1>StartUp 101</h1>
             <h3>Welcom</h3>
+            <h2>Let's start</h2>
             <br>
             <div class="user-form">
-              <!-- <a class="facebookBtn smGlobalBtn" href="#" ></a> -->
-              <form method="get" id="loginForm" action="">
-              	<input type="password" value="" name="password" placeholder="insert number..." autocomplete="off">
-              	<button><i class="fa fa-facebook" aria-hidden="true" onclick="onclick_facebookLogin();"></i></button>
+              <form id="loginForm" name="loginForm">
+              	<!-- <input type="submit" value="Signup To Facebook" autocomplete="off"> -->
+                <input type="password" name="password" placeholder="인증정보를 입력해주세요." autocomplete="off">
+              	<button type="button" onclick="onclick_login(this.form);"><i class="fa fa-facebook" aria-hidden="true"></i></button>
               </form>
             </div>
         </div>
