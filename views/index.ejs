@@ -10,8 +10,9 @@
         <link href="/theme/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="/stylesheets/style-login.css" rel="stylesheet">
         <link href="/theme/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-        <script src="/javascripts/login.js"></script>
         <script src="/theme/jquery/dist/jquery.min.js"></script>
+        <script src="/javascripts/index.js"></script>
+        <script src="/javascripts/common/main.js"></script>
     </head>
 
     <body>
@@ -24,8 +25,8 @@
             <div class="user-form">
               <form id="loginForm" name="loginForm">
               	<!-- <input type="submit" value="Signup To Facebook" autocomplete="off"> -->
-                <input type="password" name="password" placeholder="인증정보를 입력해주세요." autocomplete="off">
-              	<button type="button" onclick="onclick_login(this.form);"><i class="fa fa-facebook" aria-hidden="true"></i></button>
+                <input type="password" name="auth_number" placeholder="인증정보를 입력해주세요." autocomplete="off" maxlength="8">
+              	<button type="button" onclick="onclick_facebookLogin(this.form);"><i class="fa fa-facebook" aria-hidden="true"></i></button>
               </form>
             </div>
         </div>

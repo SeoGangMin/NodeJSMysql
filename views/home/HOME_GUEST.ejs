@@ -1,36 +1,36 @@
 <div class="row">
   <div class="col-md-12 col-sm-12 col-xs-12">
-    <div class="x_panel">
+    <div class="x_panel" style="height: auto;">
       <div class="x_title">
         <h2>아이디어 등록</h2>
         <ul class="nav navbar-right panel_toolbox">
-          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+          <li><a class="collapse-link"><i class="fa fa-chevron-down"></i></a></li>
         </ul>
         <div class="clearfix"></div>
       </div>
-      <div class="x_content">
+      <div class="x_content" style="display:none;">
         <br>
-        <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+        <form id="insertIdeaForm" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
 
           <div class="form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">아이디어 <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12">
+              <input type="text" id="title" name="title" required="required" placeholder="Write Idea..." class="form-control col-md-7 col-xs-12" maxlength="100">
             </div>
           </div>
           <div class="form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12">설명 <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <textarea class="form-control" rows="3" placeholder="Description..."></textarea>
+              <textarea class="form-control" name="description" id="description" required="required" rows="3" placeholder="Write Description..."></textarea>
             </div>
           </div>
           <div class="ln_solid"></div>
           <div class="form-group">
             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-              <button type="submit" class="btn btn-primary">취소</button>
-              <button type="submit" class="btn btn-success">등록</button>
+              <button type="reset" class="btn btn-primary">취소</button>
+              <button type="button" onclick="onclick_insertIdea(this.form);" class="btn btn-success">등록</button>
             </div>
           </div>
 
@@ -49,18 +49,60 @@
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
+        <%
+          var idea_list = result.idea_list;
+        %>
 
         <table class="table">
           <thead>
             <tr>
-              <th>#</th>
-              <th>아이디어명</th>
-              <th>설명</th>
+              <th>No</th>
+              <th>아이디어</th>
+              <th width="60%">설명</th>
               <th>등록자</th>
               <th></th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="tbodyIdeaListArea">
+            <% if(idea_list.length == 0) {%>
+              <tr>
+                <td colspan="5" style="text-align:center; padding:20px; border-bottom:1px solid #ddd;">등록된 아이디어가 없습니다. 아이디어를 등록해 주세요.</td>
+              </tr>
+            <%}else{%>
+              <%
+              for(var i in idea_list){
+                var no          = (Number(i)+1);
+                var item        = idea_list[i];
+                var idx         = item['idx'];
+                var title       = item['title'];
+                var description = item['description'];
+                var writer_name = item['writer_name'];
+                var is_author   = item['is_author'];
+              %>
+              <tr>
+                <th scope="row"><%= no %></th>
+                <td><%= title %></td>
+                <td><%= description %></td>
+                <td>@<%= writer_name %></td>
+                <td>
+                  <%if(is_author){%>
+                      <form id="row_form_<%= idx %>" name="row_form_<%= idx %>">
+                        <input type="hidden" name="idx" value="<%= idx %>"/>
+                        <button type="button" class="btn btn-round btn-danger btn-xs" onclick="onclick_btnDeleteIdea(this.form);">
+                          &nbsp;&nbsp;<i class="fa fa-trash"></i>&nbsp;&nbsp;
+                        </button>
+                      </form>
+                  <%}%>
+
+                </td>
+              </tr>
+
+              <%}%>
+
+            <%}%>
+
+
+            <!--
             <tr>
               <th scope="row">1</th>
               <td>아이디어 테스트입니다.</td>
@@ -98,7 +140,7 @@
                 <button type="button" class="btn btn-round btn-info btn-xs">참여하기</button>
                 <button type="button" class="btn btn-round btn-danger btn-xs">참여취소</button>
               </td>
-            </tr>
+            </tr> -->
 
           </tbody>
         </table>

@@ -1,23 +1,11 @@
 var express = require('express');
 var router = express.Router();
 
-var Mysql  = COMMONS.MysqlWrapper
-    ,Query = QUERIES.Users;
+var Mysql           = COMMONS.MysqlWrapper
+    ,UserQuery      = QUERIES.UserQuery
+    ,PromiseWrapper = COMMONS.PromiseWrapper;
 
-/* GET users listing. */
-router.get('/users', function(req, res, next) {
-  var query = Query.selectAllUsers();
-  Mysql.execQueryPromise(query)
-  .then(
-    function(rows){
-      res.send('respond with a resource');
-    }
-  )
-  .fail(
-    function(err){
-      next(err);
-    }
-  );
-});
+
+
 
 module.exports = router;

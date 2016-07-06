@@ -26,9 +26,9 @@
         <h3>&nbsp;</h3>
 
         <ul class="nav side-menu">
-          <li><a href="/home"><i class="fa fa-home"></i> Home</a></li>
-          <li><a href="/vote"><i class="fa fa-thumbs-up"></i> Vote</a></li>
-          <li><a href="/teamchoice"><i class="fa fa-group"></i> Team</a></li>
+          <li><a href="/guest/home"><i class="fa fa-home"></i> Home</a></li>
+          <li><a href="/guest/vote"><i class="fa fa-thumbs-up"></i> Vote</a></li>
+          <li><a href="/guest/teamchoice"><i class="fa fa-group"></i> Team</a></li>
           <!-- If joined team -->
           <!-- <li><a><i class="fa fa-edit"></i> Teams <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
@@ -126,7 +126,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li class="">
           <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-            <img src="http://graph.facebook.com/1025240817569170/picture?type=large&width=100&height=100" alt="">서강민
+            <img src="<%= session.user.picture %>" alt=""><%= session.user.name %>
             <span class=" fa fa-angle-down"></span>
           </a>
           <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -155,7 +155,7 @@
             <li>
               <a>
                 <span class="image">
-                  <img src="http://graph.facebook.com/1025240817569170/picture?type=large&width=100&height=100" alt="Profile Image" />
+                  <img src="<%= session.user.picture %>" alt="Profile Image" />
                 </span>
                 <span>
                   <span>John Smith</span>

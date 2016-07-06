@@ -36,7 +36,12 @@
 <!-- Custom Theme Scripts -->
 <script src="/javascripts/lib/custom.js"></script>
 
-<!-- Flot -->
-<script>
+<!-- Common js -->
+<script src="/javascripts/common/main.js"></script>
+<script src="/javascripts/<%= view %>.js"></script>
 
+<script>
+  if(initPage){
+    initPage();
+  }
 </script>

@@ -1,0 +1,81 @@
+<%
+var own_vote_count = result.own_vote_count;
+var sub_title_message    = (own_vote_count > 0) ? (own_vote_count+ '개의 투표권을 소유하고 계십니다') : ('투표권을 모두 소진하셨습니다');
+var idea_list = result.idea_list;
+%>
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2><i class="fa fa-align-left"></i> 아이디어목록 <small><%= sub_title_message %></small></h2>
+        <ul class="nav navbar-right panel_toolbox">
+          <!-- <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+          </li> -->
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+
+        <!-- start accordion -->
+        <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
+          <% if(idea_list.length == 0) {%>
+              <div style="text-align:center; padding:20px; border-bottom:1px solid #ddd;">등록된 아이디어가 없습니다. 아이디어를 등록해 주세요.</td>
+          <%}else{%>
+            <%
+            for(var i in idea_list){
+              var no          = (Number(i)+1);
+              var item        = idea_list[i];
+              var idx         = item['idx'];
+              var title       = item['title'];
+              var description = item['description'];
+              var writer_name = item['writer_name'];
+              var vote_count  = item['vote_count']
+              var is_vote     = item['is_vote'];
+
+              var btn_cls     = (is_vote) ? 'btn-success' : 'btn-default';
+              var disabled    = '';
+              if(is_vote || own_vote_count == 0){
+                disabled = ' disabled="disabled" ';
+              }
+
+            %>
+            <div class="panel">
+              <a class="panel-heading collapsed" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordion" href="#panel_idx_<%= idx %>" aria-expanded="false" aria-controls="collapseOne">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <h4 class="panel-title"><%= no %>.&nbsp;<%= title %></h4>
+                  </div>
+                  <div class="col-sm-6" style="text-align:right;">
+                    <span id="spanVoteCount_<%= idx %>"><i class="fa fa-thumbs-up"></i>&nbsp;&nbsp;<%= vote_count %></span>
+                    &nbsp;&nbsp;&nbsp;
+                    <span>@<%= writer_name %></span>
+                  </div>
+                </div>
+              </a>
+              <div id="panel_idx_<%= idx %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" aria-expanded="false" style="height: 0px;">
+                <div class="panel-body">
+                  <div class="row" style="padding:10px;">
+                    <p><%= description %></p>
+                  </div>
+                  <div class="row" style="text-align:right;">
+                    <form id="row_form_<%= idx %>" name="row_form_<%= idx %>" action="/guest/idea_vote" method="post">
+                      <input type="hidden" name="idx" value="<%= idx %>"/>
+                      <button type="submit" class="btn btn-round <%= btn_cls %> btn-xs" <%= disabled %> >
+                        &nbsp;&nbsp;<i class="fa fa-thumbs-up"></i>&nbsp;&nbsp;
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <%}%>
+          <%}%>
+        </div>
+        <!-- end of accordion -->
+
+
+      </div>
+    </div>
+  </div>
+</div>
